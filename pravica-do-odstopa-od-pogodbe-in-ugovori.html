@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pravica do odstopa od pogodbe in ugovori — Pomoč</title>
+<title>Pravica do odstopa od pogodbe in ugovori - Telekom Slovenije</title>
 
 <!-- ===== SAP Emarsys Web Extend (Scarab) tracking code ===== -->
 <script type="text/javascript">
@@ -20,163 +20,204 @@ var ScarabQueue = ScarabQueue || [];
 
 <style>
   :root{
-    --mag:#e20074; --ink:#1a1a1f; --muted:#5b6472; --line:#e6e8ee;
-    --bg:#f6f7f9; --card:#fff; --code:#0b0d11;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    /* === BRAND BARVE - po potrebi zamenjaj 3-4 vrednosti === */
+    --brand:#0098db;          /* primarna modra (gumbi, povezave, poudarki) */
+    --brand-dark:#002e5d;     /* temna navy (naslovi, header wordmark) */
+    --cyan:#00b5e2;           /* turkizna (logo dot gradient) */
+    --brand-tint:#e8f4fb;     /* svetla modra (boxi) */
+    /* ====================================================== */
+    --ink:#1c2733; --muted:#5b6878; --line:#e4e8ee; --bg:#ffffff; --soft:#f5f7fa;
+    --sans:"Segoe UI",Roboto,-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6}
-  a{color:var(--mag);text-decoration:none}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65}
+  a{color:var(--brand);text-decoration:none}
   a:hover{text-decoration:underline}
-  .topbar{background:#fff;border-bottom:1px solid var(--line)}
-  .topbar .inner{max-width:980px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
-  .logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
-  .logo .m{color:var(--mag)}
-  .nav{display:flex;gap:18px;font-size:14px;color:var(--muted)}
-  .spacer{flex:1}
-  .hero{background:linear-gradient(180deg,#fff, #fbfbfd);border-bottom:1px solid var(--line)}
-  .crumbs{max-width:980px;margin:0 auto;padding:14px 20px 0;font-size:13px;color:var(--muted)}
+
+  /* top bars */
+  .util{background:var(--soft);border-bottom:1px solid var(--line);font-size:13px}
+  .util .in{max-width:1040px;margin:0 auto;padding:8px 20px;display:flex;gap:20px;color:var(--muted)}
+  .util .sp{flex:1}
+  .util a{color:var(--muted)}
+  .head{background:#fff;border-bottom:1px solid var(--line)}
+  .head .in{max-width:1040px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:26px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .logo .word{font-size:20px;font-weight:800;letter-spacing:-.3px;color:var(--brand-dark)}
+  .logo .word .s{color:var(--brand)}
+  .mainnav{display:flex;gap:22px;font-size:15px;font-weight:600}
+  .mainnav a{color:var(--ink)}
+  .search{margin-left:auto;font-size:14px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:7px 14px;background:var(--soft)}
+
+  /* breadcrumb + hero */
+  .crumbs{max-width:1040px;margin:0 auto;padding:16px 20px 0;font-size:13px;color:var(--muted)}
   .crumbs a{color:var(--muted)}
-  .wrap{max-width:980px;margin:0 auto;padding:8px 20px 60px}
-  h1{font-size:30px;line-height:1.2;margin:14px 0 6px}
-  .lead{font-size:17px;color:#3a4150;margin:0 0 22px}
-  .layout{display:grid;grid-template-columns:1fr 280px;gap:28px;align-items:start}
-  @media(max-width:820px){.layout{grid-template-columns:1fr}}
-  article h2{font-size:20px;margin:28px 0 8px}
-  article p{margin:0 0 12px}
-  article ul{margin:0 0 14px;padding-left:20px}
-  article li{margin:4px 0}
-  .note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--mag);border-radius:8px;padding:14px 16px;margin:16px 0;font-size:15px}
-  .aside{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;position:sticky;top:18px}
-  .aside h3{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:0 0 10px}
+  .wrap{max-width:1040px;margin:0 auto;padding:6px 20px 60px}
+  h1{font-size:32px;line-height:1.2;margin:12px 0 18px;color:var(--brand-dark)}
+  .layout{display:grid;grid-template-columns:1fr 270px;gap:36px;align-items:start}
+  @media(max-width:860px){.layout{grid-template-columns:1fr}}
+  article p{margin:0 0 14px;font-size:16px;color:#2b3947}
+  article h2{font-size:20px;margin:28px 0 8px;color:var(--brand-dark)}
+  .addr{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;margin:8px 0 14px}
+  .aside{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;position:sticky;top:18px;box-shadow:0 1px 3px rgba(20,40,70,.05)}
+  .aside h3{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:0 0 12px}
   .aside ul{list-style:none;margin:0;padding:0}
-  .aside li{padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .aside li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
   .aside li:last-child{border-bottom:none}
-  .btn{display:inline-block;background:var(--mag);color:#fff;border:none;border-radius:8px;padding:11px 16px;
-    font-size:15px;font-weight:600;cursor:pointer;margin-top:8px}
-  .btn:hover{background:#c70066;text-decoration:none}
-  .btn.sec{background:#fff;color:var(--mag);border:1px solid var(--mag)}
-  footer{max-width:980px;margin:0 auto;padding:0 20px}
-  .demobar{margin-top:28px;border:1px dashed #c9ccd6;border-radius:12px;background:#fff;padding:14px 16px}
-  .demobar summary{cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
-  .log{margin-top:12px;background:var(--code);color:#e7e9ee;border-radius:10px;font-family:var(--mono);
-    font-size:12.5px;max-height:220px;overflow:auto;padding:6px}
-  .log .line{padding:6px 9px;border-bottom:1px solid #14171d;word-break:break-word}
-  .log .line:last-child{border-bottom:none}
+  .cta{display:block;margin-top:14px;background:var(--brand);color:#fff;text-align:center;border-radius:8px;padding:11px;font-weight:700}
+  .cta:hover{background:#0086c4;text-decoration:none}
+
+  /* footer */
+  footer{background:var(--brand-dark);color:#c9d6e4;margin-top:40px}
+  footer .in{max-width:1040px;margin:0 auto;padding:28px 20px;font-size:13px;line-height:1.8}
+  footer a{color:#9fc4e6}
+  footer .cols{display:flex;gap:40px;flex-wrap:wrap}
+  footer b{color:#fff;display:block;margin-bottom:6px;font-size:14px}
+  .copy{border-top:1px solid #103a63;margin-top:22px;padding-top:14px;color:#8fa6bd}
+
+  /* demo log (collapsed, unobtrusive) */
+  .demobar{max-width:1040px;margin:18px auto 0;padding:0 20px}
+  .demobar details{border:1px dashed #c9ccd6;border-radius:10px;background:#fff;padding:12px 14px}
+  .demobar summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--muted)}
+  .meta{font-size:12px;color:var(--muted);margin-top:8px;font-family:var(--mono)}
+  .log{margin-top:10px;background:#0b0d11;color:#e7e9ee;border-radius:8px;font-family:var(--mono);font-size:12px;max-height:200px;overflow:auto;padding:6px}
+  .log .l{padding:5px 8px;border-bottom:1px solid #14171d;word-break:break-word}
+  .log .l:last-child{border-bottom:none}
   .log .k{color:#3aa0ff}.log .go{color:#34d399}
-  .demobar .meta{font-size:12px;color:var(--muted);margin-top:8px;font-family:var(--mono)}
+  .btn-demo{background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
 </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="inner">
-      <span class="logo">tele<span class="m">kom</span></span>
-      <div class="nav">
-        <span>Zasebni</span><span>Poslovni</span><span>Pomoč</span>
-      </div>
-      <div class="spacer"></div>
-      <a href="../">&larr; Simulator</a>
+  <div class="util">
+    <div class="in">
+      <a href="https://www.telekom.si/">Zasebni</a>
+      <a href="https://www.telekom.si/poslovni">Poslovni</a>
+      <a href="https://www.telekom.si/e-trgovina">E-trgovina</a>
+      <a href="https://moj.telekom.si">Moj Telekom</a>
+      <span class="sp"></span>
+      <a href="https://www.telekom.si/pomoc">Pomoč</a>
+      <a href="#">Prodajna mesta</a>
+      <a href="https://www.telekom.si/pomoc/kontakt">Kontakt</a>
     </div>
   </div>
 
-  <div class="hero">
-    <div class="crumbs"><a href="../">Domov</a> &rsaquo; <a href="#">Pomoč</a> &rsaquo; <a href="#">E-trgovina</a> &rsaquo; Pravica do odstopa od pogodbe in ugovori</div>
-    <div class="wrap" style="padding-bottom:18px">
-      <h1>Pravica do odstopa od pogodbe in ugovori</h1>
-      <p class="lead">Na tej strani so zbrane informacije o pravici do odstopa od pogodbe, postopku odstopa ter oddaji ugovorov in reklamacij.</p>
+  <div class="head">
+    <div class="in">
+      <a class="logo" href="/">
+        <svg width="34" height="34" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="22" r="11" fill="var(--brand-dark)" opacity=".85"/>
+          <circle cx="38" cy="20" r="9"  fill="var(--brand)" opacity=".85"/>
+          <circle cx="20" cy="38" r="9"  fill="var(--cyan)" opacity=".85"/>
+          <circle cx="36" cy="40" r="12" fill="var(--brand)" opacity=".70"/>
+          <circle cx="46" cy="34" r="6"  fill="var(--cyan)" opacity=".85"/>
+        </svg>
+        <span class="word">Telekom<span class="s"> Slovenije</span></span>
+      </a>
+      <div class="mainnav">
+        <a href="#">Mobitel</a><a href="#">Internet in TV</a><a href="#">E-trgovina</a><a href="#">Pomoč</a>
+      </div>
+      <span class="search">Najdi…</span>
     </div>
   </div>
+
+  <div class="crumbs"><a href="https://www.telekom.si/pomoc">Pomoč</a> &rsaquo; <a href="https://www.telekom.si/pomoc/e-trgovina">E-trgovina</a> &rsaquo; Pravica do odstopa od pogodbe in ugovori</div>
 
   <div class="wrap">
+    <h1>Pravica do odstopa od pogodbe in ugovori</h1>
     <div class="layout">
       <article>
-        <h2>Odstop od pogodbe v 14 dneh</h2>
-        <p>Pri sklenitvi pogodbe na daljavo ali zunaj poslovnih prostorov imate pravico, da v 14 dneh od sklenitve odstopite od pogodbe brez navedbe razloga. Rok začne teči z dnem sklenitve pogodbe oziroma s prevzemom blaga.</p>
-        <p>Za uveljavljanje pravice nas o svoji odločitvi obvestite z nedvoumno izjavo (npr. po elektronski pošti ali pisno). Lahko uporabite tudi obrazec za odstop, ni pa to obvezno.</p>
+        <p>Potrošnik (zasebni uporabnik) ima pravico pri nakupu na daljavo podjetju v 14 dneh od dobave blaga sporočiti, da odstopa od pogodbe, ne da bi mu bilo treba navesti razlog za svojo odločitev. To ne velja za poslovne uporabnike.</p>
 
-        <h2>Kako oddam odstop?</h2>
-        <ul>
-          <li>Prek spletnega obrazca v razdelku Pomoč.</li>
-          <li>Po elektronski pošti na naslov podpore.</li>
-          <li>Pisno na naslov sedeža podjetja.</li>
-        </ul>
-        <p>Po prejemu vašega obvestila vam nemudoma pošljemo potrdilo o prejemu odstopa.</p>
+        <p>Obvestilo o odstopu od pogodbe lahko potrošnik predloži na obrazcu Telekoma Slovenije »Vloga za odstop od Pogodbe, sklenjene na daljavo zunaj poslovnih prostorov oz. s prodajo blaga na obroke« ali na Obrazcu za uveljavitev pravice potrošnika do odstopa od pogodbe, lahko pa odstop poda z drugačno nedvoumno izjavo, iz katere jasno izhaja, da odstopa od pogodbe.</p>
 
-        <h2>Ugovori in reklamacije</h2>
-        <p>Če se ne strinjate z obračunom ali kakovostjo storitve, lahko vložite ugovor v 15 dneh od prejema računa. Ugovor obravnavamo v zakonskem roku in vas obvestimo o izidu.</p>
-        <p>Med reševanjem ugovora vam ni treba poravnati spornega dela računa, nesporni del pa zapade v plačilo v skladu s splošnimi pogoji.</p>
+        <div class="addr">
+          Obvestilo o odstopu lahko sporočite:<br>
+          &bull; na e-naslov <a href="mailto:e-trgovina@telekom.si">e-trgovina@telekom.si</a><br>
+          &bull; po pošti na naslov Telekom Slovenije, d.d., Naročniška razmerja, Vojkova 78, 1546 Ljubljana<br>
+          &bull; po telefonu <a href="tel:+38641700700">041 700 700</a>
+        </div>
 
-        <h2>Pogosta vprašanja</h2>
-        <ul>
-          <li>Ali odstop velja tudi za že aktivirane storitve?</li>
-          <li>Kako vrnem prejeto opremo?</li>
-          <li>V kolikšnem času prejmem vračilo morebitnega plačila?</li>
-        </ul>
+        <p>Vrnitev prejetega blaga podjetju v roku za odstop od pogodbe se šteje za sporočilo o odstopu od pogodbe. Potrošnik mora blago vrniti v 14 dneh po sporočilu o odstopu, pri čemer neposredne stroške vračila krije sam.</p>
+
+        <p>Potrošnik sme opraviti ogled prejetega blaga zgolj v obsegu, kot je nujno potrebno za ugotovitev dejanskega stanja. Priporočljivo je, da blago vrne nerabljeno, nepoškodovano, v originalni embalaži in nespremenjeni količini. Odstop je mogoč tudi, če je blago rabljeno ali poškodovano — v tem primeru potrošnik odgovarja za zmanjšanje vrednosti blaga.</p>
+
+        <p>Telekom Slovenije kupcu vrne vsa prejeta plačila v najkrajšem možnem času, najpozneje pa v 14 dneh od prejetja sporočila o odstopu od pogodbe.</p>
+
+        <div class="addr">
+          <b>Naslov za vračilo blaga:</b><br>
+          Telekom Slovenije, d.d.<br>
+          Litostrojska 58B<br>
+          1000 Ljubljana
+        </div>
+
+        <h2>Ugovori, pripombe, zahtevki, izjave</h2>
+        <p>Uporabnik ugovore, pripombe, zahtevke in izjave v rokih in na način, kot določa veljavna zakonodaja, posreduje pisno na naslov: Telekom Slovenije, d.d., E-trgovina, Litostrojska 58B, 1000 Ljubljana, s pripisom Reklamacija.</p>
+        <p>Za postopek reševanja je uporabnik dolžan posredovati točne podatke kupca, ki je opravil nakup (ime in priimek, naslov, telefonsko številko). V primeru zahtevka iz naslova napake na blagu oziroma garancije je treba priložiti tudi blago z vso pripadajočo dokumentacijo.</p>
       </article>
 
       <aside class="aside">
         <h3>Na tej strani</h3>
         <ul>
           <li><a href="#">Odstop v 14 dneh</a></li>
-          <li><a href="#">Kako oddam odstop</a></li>
+          <li><a href="#">Kako sporočim odstop</a></li>
+          <li><a href="#">Vračilo blaga</a></li>
           <li><a href="#">Ugovori in reklamacije</a></li>
-          <li><a href="#">Pogosta vprašanja</a></li>
         </ul>
+        <a class="cta" href="https://www.telekom.si/pomoc/kontakt">Potrebujete pomoč?</a>
       </aside>
     </div>
-
-    <footer>
-      <details class="demobar">
-        <summary>Demo: Web Extend dogodki na tej strani</summary>
-        <div class="meta">merchant 136F49936EB00D4A &middot; ob nalaganju strani se samodejno sprožita category + tag (visit = signal namere). Overlay za anonimne se prikaže preko Web Channel kampanje s pogojem URL vsebuje <b>/pravica-do-odstopa-od-pogodbe-in-ugovori</b>.</div>
-        <div style="margin-top:8px">
-          <button class="btn sec" onclick="highIntent()">Sproži visoko namero (cancellation_intent)</button>
-        </div>
-        <div class="log" id="log"></div>
-      </details>
-    </footer>
   </div>
+
+  <div class="demobar">
+    <details>
+      <summary>Demo: Web Extend dogodki na tej strani</summary>
+      <div class="meta">merchant 136F49936EB00D4A &middot; ob nalaganju strani se samodejno sprožita category + tag (obisk = signal namere) + go. Overlay za anonimne se prikaže prek Web Channel kampanje s pogojem URL vsebuje /pravica-do-odstopa-od-pogodbe-in-ugovori.</div>
+      <button class="btn-demo" onclick="highIntent()">Sproži visoko namero (cancellation_intent)</button>
+      <div class="log" id="log"></div>
+    </details>
+  </div>
+
+  <footer>
+    <div class="in">
+      <div class="cols">
+        <div><b>E-trgovina</b>Mobiteli<br>Televizorji<br>Računalništvo<br>Pametne ure</div>
+        <div><b>Uporabniki</b>Moj Telekom<br>Pomoč<br>Program zvestobe<br>Info in obvestila</div>
+        <div><b>Podjetje</b>O podjetju<br>Kariera<br>Za vlagatelje<br>Sporočila za medije</div>
+        <div><b>Kontakt</b><a href="tel:+38641700700">041 700 700</a><br><a href="mailto:e-trgovina@telekom.si">e-trgovina@telekom.si</a></div>
+      </div>
+      <div class="copy">© 2026 Telekom Slovenije, d.d. &middot; Litostrojska 58B, 1000 Ljubljana</div>
+    </div>
+  </footer>
 
 <script>
   var logEl = document.getElementById('log');
   function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
-  function render(arr){return arr.map(function(p,i){
+  function render(a){return a.map(function(p,i){
     if(i===0) return '<span class="k">"'+esc(p)+'"</span>';
     if(typeof p==='object') return esc(JSON.stringify(p));
     return '"'+esc(p)+'"';
   }).join(', ');}
-  function logEvent(arr){
-    var d=new Date(), ts=d.toLocaleTimeString('en-GB',{hour12:false});
-    var cls = arr[0]==='go' ? 'go' : '';
-    var l=document.createElement('div'); l.className='line';
-    l.innerHTML='<span style="color:#5b6472">'+ts+'</span>  <span class="'+cls+'">ScarabQueue.push([ '+render(arr)+' ])</span>';
+  function logEvent(a){
+    if(!logEl) return;
+    var t=new Date().toLocaleTimeString('en-GB',{hour12:false});
+    var cls = a[0]==='go' ? 'go':'';
+    var l=document.createElement('div'); l.className='l';
+    l.innerHTML='<span style="color:#5b6472">'+t+'</span>  <span class="'+cls+'">ScarabQueue.push([ '+render(a)+' ])</span>';
     logEl.appendChild(l); logEl.scrollTop=logEl.scrollHeight;
   }
   function push(a){ ScarabQueue.push(a); logEvent(a); }
   function go(){ push(['go']); }
 
-  // Auto-fire on page load: visiting the termination page = behavioural intent signal
+  // obisk strani o odstopu = vedenjski signal namere
   window.addEventListener('load', function(){
     push(['category','Pomoc > E-trgovina > Odstop od pogodbe']);
     push(['tag','contract_termination_view',{page:'pravica-do-odstopa-od-pogodbe-in-ugovori', locale:'sl'}]);
     go();
   });
-
   function highIntent(){
     push(['tag','cancellation_intent',{strength:'high', source:'help_page', locale:'sl'}]);
     go();
-  }
-  function askOffer(){
-    push(['tag','retention_cta',{button:'offer', page:'termination'}]);
-    go();
-    alert('Demo: gumb "Želim ponudbo" - v Web Channel kampanji ga povežeš na URL obrazca ali sprožiš Interactions journey.');
-  }
-  function learnMore(){
-    push(['tag','retention_cta',{button:'learn_more', page:'termination'}]);
-    go();
-    alert('Demo: gumb "Zanima me več" - mehkejša veja (nurture).');
   }
 </script>
 </body>
