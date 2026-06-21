@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web Behaviour Simulator — Telekom / SAP Emarsys Demo</title>
+
+<!-- ===== SAP Emarsys Web Extend (Scarab) tracking code ===== -->
+<script type="text/javascript">
+var ScarabQueue = ScarabQueue || [];
+(function(id) {
+  if (document.getElementById(id)) return;
+  var js = document.createElement('script'); js.id = id;
+  js.src = '//cdn.scarabresearch.com/js/136F49936EB00D4A/scarab-v2.js';
+  var fs = document.getElementsByTagName('script')[0];
+  fs.parentNode.insertBefore(js, fs);
+})('scarab-js-api');
+</script>
+<!-- ===== end tracking code ===== -->
+
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --text:#e7e9ee; --muted:#9aa3b2; --accent:#e20074; --accent2:#3aa0ff;
+    --ok:#34d399; --warn:#fbbf24; --err:#f87171; --code:#0b0d11;
+    --radius:12px; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.45}
+  .wrap{max-width:1080px;margin:0 auto;padding:20px 18px 60px}
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 0 18px;border-bottom:1px solid var(--line)}
+  h1{font-size:18px;margin:0;font-weight:650;letter-spacing:.2px}
+  .sub{color:var(--muted);font-size:13px;margin-top:2px}
+  .spacer{flex:1}
+  .badge{font-family:var(--mono);font-size:12px;padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:var(--panel)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;background:var(--muted)}
+  .dot.ok{background:var(--ok)} .dot.err{background:var(--err)} .dot.warn{background:var(--warn)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:0 0 12px;font-weight:600}
+  .identity{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .pill{font-family:var(--mono);font-size:12px;padding:6px 10px;border-radius:8px;background:var(--panel2);border:1px solid var(--line)}
+  .pill b{color:var(--accent2)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  input[type=text],input[type=email]{flex:1;min-width:180px;background:var(--code);border:1px solid var(--line);color:var(--text);
+    border-radius:8px;padding:9px 11px;font-family:var(--mono);font-size:13px}
+  input:focus{outline:none;border-color:var(--accent2)}
+  button{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);
+    border-radius:8px;padding:9px 12px;font-size:13px;font-weight:550;transition:.12s;display:inline-flex;align-items:center;gap:7px}
+  button:hover{border-color:#3a4150;background:#252b36;transform:translateY(-1px)}
+  button:active{transform:translateY(0)}
+  button.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.accent:hover{background:#c70066;border-color:#c70066}
+  button.blue{background:var(--accent2);border-color:var(--accent2);color:#06121f}
+  button.blue:hover{filter:brightness(1.07)}
+  button.ghost{background:transparent}
+  .btns{display:flex;flex-direction:column;gap:8px}
+  .btns button{justify-content:flex-start;width:100%}
+  .tag{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .hint{font-size:12px;color:var(--muted);margin-top:10px}
+  .hint code{font-family:var(--mono);background:var(--code);padding:1px 5px;border-radius:4px;color:#cbd3e1}
+  .console{margin-top:16px}
+  .consolehead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .consolehead h2{margin:0}
+  .log{background:var(--code);border:1px solid var(--line);border-radius:var(--radius);
+    font-family:var(--mono);font-size:12.5px;max-height:340px;overflow:auto;padding:6px}
+  .logline{padding:7px 10px;border-bottom:1px solid #14171d;display:flex;gap:10px;align-items:flex-start}
+  .logline:last-child{border-bottom:none}
+  .ts{color:#5b6472;white-space:nowrap}
+  .cmd{color:#e7e9ee;word-break:break-word;flex:1}
+  .cmd .k{color:var(--accent2)}
+  .cmd.go{color:var(--ok)}
+  .cmd.id{color:var(--accent)}
+  .empty{color:var(--muted);padding:14px 10px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:8px}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .swatch{width:9px;height:9px;border-radius:2px;display:inline-block}
+  details{margin-top:14px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);padding:10px 12px}
+  summary{cursor:pointer;font-size:13px;font-weight:550;color:var(--muted)}
+  textarea{width:100%;margin-top:8px;background:var(--code);border:1px solid var(--line);color:var(--text);
+    border-radius:8px;padding:10px;font-family:var(--mono);font-size:12.5px;min-height:64px;resize:vertical}
+  .foot{margin-top:24px;font-size:12px;color:var(--muted);line-height:1.6}
+  .foot a{color:var(--accent2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>Web Behaviour Simulator</h1>
+      <div class="sub">SAP Emarsys Web Extend &middot; Telekom Slovenije live demo</div>
+    </div>
+    <div class="spacer"></div>
+    <span class="badge">merchant&nbsp;<b style="color:var(--accent2)">136F49936EB00D4A</b></span>
+    <span class="badge" id="status"><span class="dot warn"></span><span id="statusText">loading Scarab…</span></span>
+  </header>
+
+  <!-- Identity state -->
+  <div class="card" style="margin-top:18px">
+    <h2>Current visitor</h2>
+    <div class="identity">
+      <span class="pill" id="identityPill">Identity: <b id="identityVal">anonymous</b></span>
+      <span class="tag">Open this page in a fresh Incognito window for a clean anonymous visitor.</span>
+    </div>
+    <div class="row">
+      <input type="email" id="emailInput" value="andrej.bergant@frodx.com" placeholder="email to identify with">
+      <button class="accent" onclick="identifyEmail()">Identify (setEmail) &rarr;</button>
+    </div>
+    <div class="row">
+      <input type="text" id="cidInput" placeholder="customer ID (optional, e.g. TS-100245)">
+      <button class="ghost" onclick="identifyCustomerId()">Identify by customer ID</button>
+      <button class="ghost" onclick="resetVisitor()">Reset / new visitor</button>
+    </div>
+    <div class="hint">
+      <code>setEmail</code> / <code>setCustomerId</code> link this browser's prior anonymous behaviour to a known contact (identity resolution). Identity persists in the Scarab cookie for the session.
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- Anonymous behaviours -->
+    <div class="card">
+      <h2>(1) Anonymous behaviour &mdash; contract-termination intent</h2>
+      <div class="btns">
+        <button onclick="viewHome()">&#127968; Visit homepage <span class="tag">page view</span></button>
+        <button onclick="browseTermination()">&#128196; Open "Odstop od pogodbe" help page <span class="tag">category + tag</span></button>
+        <button onclick="searchTermination()">&#128269; Search "odstop od pogodbe" <span class="tag">searchTerm</span></button>
+        <button class="blue" onclick="fireIntentTag()">&#9889; Fire cancellation-intent tag <span class="tag">tag &rarr; trigger</span></button>
+      </div>
+      <div class="hint">The <code>tag</code> and <code>searchTerm</code> commands are what you wire as the <b>Web Extend Event</b> trigger in an Interactions journey. This is the anonymous &rarr; real-time decisioning path (UC1, variant A).</div>
+    </div>
+
+    <!-- Known-user behaviours -->
+    <div class="card">
+      <h2>(2) Known-user behaviour (after identify)</h2>
+      <div class="btns">
+        <button onclick="browseTermination()">&#128196; Re-open termination help page</button>
+        <button onclick="searchTermination()">&#128269; Re-search "odstop od pogodbe"</button>
+        <button class="blue" onclick="fireIntentTag()">&#9889; Fire cancellation-intent tag (identified)</button>
+        <button onclick="viewOffer()">&#127919; View retention-offer page <span class="tag">tag</span></button>
+      </div>
+      <div class="hint">Run these <b>after</b> clicking Identify. Same events, now attached to the known contact &rarr; eligibility / consent / channel-selection path (UC1, variant B).</div>
+    </div>
+  </div>
+
+  <!-- Advanced -->
+  <details>
+    <summary>Advanced &mdash; push a custom Web Extend command</summary>
+    <textarea id="customCmd" placeholder='["tag", "my_event", {"foo":"bar"}]'></textarea>
+    <div class="row" style="margin-top:8px">
+      <button onclick="pushCustom()">Push command</button>
+      <button class="ghost" onclick="manualGo()">Send now (push ['go'])</button>
+      <span class="tag" style="align-self:center">Enter one command as a JSON array. <code>['go']</code> is auto-appended by the buttons above; use "Send now" for manual control.</span>
+    </div>
+  </details>
+
+  <!-- Console -->
+  <div class="console">
+    <div class="consolehead">
+      <h2>ScarabQueue &mdash; live event log</h2>
+      <div class="spacer"></div>
+      <button class="ghost" onclick="clearLog()">Clear log</button>
+    </div>
+    <div class="log" id="log"><div class="empty">No events fired yet. Click a behaviour above &mdash; every <code style="font-family:var(--mono)">ScarabQueue.push([...])</code> is logged here exactly as sent.</div></div>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--accent2)"></span> command</span>
+      <span><span class="swatch" style="background:var(--ok)"></span> ['go'] &mdash; transmits to Emarsys</span>
+      <span><span class="swatch" style="background:var(--accent)"></span> identity (setEmail / setCustomerId)</span>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>Verify in Emarsys:</b> Admin &rarr; Data Sources &rarr; Web Behavior &rarr; <b>Live Events</b>, and <b>Management &rarr; Event Monitoring</b>. Use the Web Extend <b>Inspector</b> bookmarklet on this page to confirm commands fire.<br>
+    Every transmit ends with <code>['go']</code> &mdash; that is the command that actually sends the batched data. Commands without a following <code>go</code> are queued but not sent.<br>
+    Web Extend behavioural data appears in Live Events near-instantly but syncs to contact fields every few hours; for real-time journey triggering use the tag/searchTerm event as the Interactions trigger.
+  </div>
+
+</div>
+
+<script>
+  // ---- helpers ----
+  var logEl = document.getElementById('log');
+  var emptyShown = true;
+
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+
+  function render(arr){
+    return arr.map(function(part,i){
+      if(i===0) return '<span class="k">"'+esc(part)+'"</span>';
+      if(typeof part === 'object') return esc(JSON.stringify(part));
+      return '"'+esc(part)+'"';
+    }).join(', ');
+  }
+
+  function logEvent(arr){
+    if(emptyShown){ logEl.innerHTML=''; emptyShown=false; }
+    var d = new Date();
+    var ts = d.toLocaleTimeString('en-GB',{hour12:false}) + '.' + String(d.getMilliseconds()).padStart(3,'0');
+    var cls = 'cmd';
+    if(arr[0]==='go') cls+=' go';
+    if(arr[0]==='setEmail'||arr[0]==='setCustomerId') cls+=' id';
+    var line = document.createElement('div');
+    line.className='logline';
+    line.innerHTML = '<span class="ts">'+ts+'</span><span class="'+cls+'">ScarabQueue.push([ '+render(arr)+' ])</span>';
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function push(arr){ ScarabQueue.push(arr); logEvent(arr); }
+  function go(){ push(['go']); }
+
+  // ---- identity ----
+  function setIdentity(label){ document.getElementById('identityVal').textContent = label; }
+
+  function identifyEmail(){
+    var email = document.getElementById('emailInput').value.trim();
+    if(!email){ alert('Enter an email'); return; }
+    push(['setEmail', email]);
+    go();
+    setIdentity(email);
+  }
+  function identifyCustomerId(){
+    var cid = document.getElementById('cidInput').value.trim();
+    if(!cid){ alert('Enter a customer ID'); return; }
+    push(['setCustomerId', cid]);
+    go();
+    setIdentity('customerId: '+cid);
+  }
+  function resetVisitor(){
+    setIdentity('anonymous (reload Incognito for a fully clean cookie)');
+    logEvent(['/* visitor reset in UI - open a new Incognito window for a true anonymous visitor */']);
+  }
+
+  // ---- behaviours ----
+  function viewHome(){
+    push(['tag','page_view',{page:'home', locale:'sl'}]);
+    go();
+  }
+  function browseTermination(){
+    push(['category','Pomoc > E-trgovina > Odstop od pogodbe']);
+    push(['tag','contract_termination_view',{page:'pravica-do-odstopa-od-pogodbe-in-ugovori', locale:'sl'}]);
+    go();
+  }
+  function searchTermination(){
+    push(['searchTerm','odstop od pogodbe']);
+    go();
+  }
+  function fireIntentTag(){
+    push(['tag','cancellation_intent',{strength:'high', source:'help_search', locale:'sl'}]);
+    go();
+  }
+  function viewOffer(){
+    push(['tag','retention_offer_view',{offer:'Stay30', locale:'sl'}]);
+    go();
+  }
+
+  // ---- advanced ----
+  function pushCustom(){
+    var raw = document.getElementById('customCmd').value.trim();
+    if(!raw) return;
+    try{
+      var arr = JSON.parse(raw);
+      if(!Array.isArray(arr)) throw 0;
+      push(arr);
+    }catch(e){ alert('Enter a valid JSON array, e.g. ["tag","my_event",{"foo":"bar"}]'); }
+  }
+  function manualGo(){ go(); }
+  function clearLog(){ logEl.innerHTML='<div class="empty">Log cleared.</div>'; emptyShown=true; }
+
+  // ---- Scarab load status ----
+  (function(){
+    var tries=0, statusEl=document.getElementById('status');
+    var t=setInterval(function(){
+      if(window.Scarab){ statusEl.innerHTML='<span class="dot ok"></span>Scarab loaded'; clearInterval(t); }
+      else if(++tries>24){ statusEl.innerHTML='<span class="dot err"></span>Scarab blocked (deploy to a public HTTPS host)'; clearInterval(t); }
+    },250);
+  })();
+</script>
+</body>
+</html>
